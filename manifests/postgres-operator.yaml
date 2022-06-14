@@ -20,7 +20,7 @@ spec:
       containers:
       - name: postgres-operator
         image: peppelin/postgres-operator:v1.8.1-4-g13dc2a6b-dirty
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         resources:
           requests:
             cpu: 100m
