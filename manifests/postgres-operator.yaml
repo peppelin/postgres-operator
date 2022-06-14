@@ -19,8 +19,8 @@ spec:
       serviceAccountName: postgres-operator
       containers:
       - name: postgres-operator
-        image: registry.opensource.zalan.do/acid/postgres-operator:v1.8.1
-        imagePullPolicy: IfNotPresent
+        image: peppelin/postgres-operator:v1.8.1-4-g13dc2a6b-dirty
+        imagePullPolicy: Never
         resources:
           requests:
             cpu: 100m
