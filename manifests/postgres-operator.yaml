@@ -19,7 +19,7 @@ spec:
       serviceAccountName: postgres-operator
       containers:
       - name: postgres-operator
-        image: peppelin/postgres-operator:v1.8.1-7-gd60399cb
+        image: peppelin/postgres-operator:v1.8.1-9-gf40b50af
         imagePullPolicy: IfNotPresent
         resources:
           requests:
