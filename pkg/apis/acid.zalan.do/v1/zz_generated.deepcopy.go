@@ -28,7 +28,6 @@ SOFTWARE.
 package v1
 
 import (
-	"fmt"
 	"log"
 
 	config "github.com/zalando/postgres-operator/pkg/util/config"
