@@ -70,6 +70,7 @@ func extractClusterName(clusterName string, teamName string) (string, error) {
 	return clusterName[teamNameLen+1:], nil
 }
 
+// TODO: validate a correct TimelineID
 func validateCloneClusterDescription(clone *CloneDescription) error {
 	// when cloning from the basebackup (no end timestamp) check that the cluster name is a valid service name
 	if clone != nil && clone.ClusterName != "" && clone.EndTimestamp == "" {
