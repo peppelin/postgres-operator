@@ -19,8 +19,8 @@ spec:
       serviceAccountName: postgres-operator
       containers:
       - name: postgres-operator
-        image: peppelin/postgres-operator:v1.8.1-9-gf40b50af
-        imagePullPolicy: IfNotPresent
+        image: peppelin/postgres-operator:latest
+        imagePullPolicy: Always
         resources:
           requests:
             cpu: 100m
