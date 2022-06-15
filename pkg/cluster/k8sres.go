@@ -875,6 +875,8 @@ func (c *Cluster) generateSpiloPodEnvVars(
 
 	if cloneDescription != nil && cloneDescription.ClusterName != "" {
 		envVars = append(envVars, c.generateCloneEnvironment(cloneDescription)...)
+		c.logger.Info("-------- HERE COME THE LOGS CALLING c.generateCloneEnvironment ------------")
+		c.logger.Info(envVars)
 	}
 
 	if standbyDescription != nil {
