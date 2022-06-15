@@ -877,6 +877,9 @@ func (c *Cluster) generateSpiloPodEnvVars(
 		envVars = append(envVars, c.generateCloneEnvironment(cloneDescription)...)
 		c.logger.Info("-------- HERE COME THE LOGS CALLING c.generateCloneEnvironment ------------")
 		c.logger.Info(envVars)
+		c.logger.Info("-------- HERE ENDS THE LOGS TIMEINEID ------------")
+		c.logger.Info(cloneDescription.TimelineID)
+
 	}
 
 	if standbyDescription != nil {
@@ -1159,6 +1162,9 @@ func (c *Cluster) generateStatefulSet(spec *acidv1.PostgresSpec) (*appsv1.Statef
 		spiloConfiguration,
 		spec.Clone,
 		spec.StandbyCluster)
+	c.logger.Info("-------- HERE ENDS THE LOGS TIMEINEID ------------")
+
+	c.logger.Info(spiloEnvVars)
 
 	// pickup the docker image for the spilo container
 	effectiveDockerImage := util.Coalesce(spec.DockerImage, c.OpConfig.DockerImage)
