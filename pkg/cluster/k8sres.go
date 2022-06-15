@@ -1861,6 +1861,8 @@ func (c *Cluster) generateCloneEnvironment(description *acidv1.CloneDescription)
 			} else {
 				c.logger.Error("cannot figure out S3 or GS bucket or AZ storage account. All options are empty in the config.")
 			}
+			c.logger.Info("-------- HERE COME THE LOGS ------------")
+			c.logger.Info(description)
 
 			// append suffix because WAL location name is not the whole path
 			result = append(result, v1.EnvVar{Name: "CLONE_WAL_BUCKET_SCOPE_SUFFIX", Value: getBucketScopeSuffix(description.UID)})
