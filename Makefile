@@ -71,7 +71,7 @@ docker: ${DOCKERDIR}/${DOCKERFILE} docker-context
 	echo "CDP tag ${CDP_TAG}"
 	echo "git describe $(shell git describe --tags --always --dirty)"
 	cd "${DOCKERDIR}" && docker build --rm -t "$(IMAGE):$(TAG)$(CDP_TAG)$(DEBUG_FRESH)$(DEBUG_POSTFIX)" -f "${DOCKERFILE}" .
-	docker build --rm -t "$(IMAGE):latest" -f "${DOCKERFILE}" .	
+	cd "${DOCKERDIR}" && docker build --rm -t "$(IMAGE):latest" -f "${DOCKERFILE}" .	
 	docker push "$(IMAGE):$(TAG)$(CDP_TAG)$(DEBUG_FRESH)$(DEBUG_POSTFIX)"
 	docker push "$(IMAGE):latest"
 
