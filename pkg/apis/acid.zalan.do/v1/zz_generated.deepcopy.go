@@ -28,8 +28,6 @@ SOFTWARE.
 package v1
 
 import (
-	"log"
-
 	config "github.com/zalando/postgres-operator/pkg/util/config"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
