@@ -1164,9 +1164,9 @@ func (c *Cluster) generateStatefulSet(spec *acidv1.PostgresSpec) (*appsv1.Statef
 		spiloConfiguration,
 		spec.Clone,
 		spec.StandbyCluster)
-	c.logger.Info("-------- HERE COMES THE LOGS spiloEnvVars ------------")
+	c.logger.Info("-------- HERE COMES THE LOGS Generate statfulset spiloEnvVars ------------")
 	c.logger.Info(fmt.Sprintf("%+v", spiloEnvVars))
-	c.logger.Info("-------- HERE ENDS THE LOGS spiloEnvVars ------------")
+	c.logger.Info("-------- HERE ENDS THE LOGS Generate statfulset spiloEnvVars ------------")
 
 	// pickup the docker image for the spilo container
 	effectiveDockerImage := util.Coalesce(spec.DockerImage, c.OpConfig.DockerImage)
