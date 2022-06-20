@@ -877,7 +877,7 @@ func (c *Cluster) generateSpiloPodEnvVars(
 		envVars = append(envVars, c.generateCloneEnvironment(cloneDescription)...)
 		c.logger.Info("-------- HERE COME THE LOGS CALLING c.generateCloneEnvironment ------------")
 		c.logger.Info(envVars)
-		c.logger.Info("-------- HERE ENDS THE LOGS TIMEINEID ------------")
+		c.logger.Info("-------- HERE ENDS THE LOGS CALLING c.generateCloneEnvironment ------------")
 		c.logger.Info(cloneDescription.TimelineID)
 
 	}
@@ -1162,9 +1162,9 @@ func (c *Cluster) generateStatefulSet(spec *acidv1.PostgresSpec) (*appsv1.Statef
 		spiloConfiguration,
 		spec.Clone,
 		spec.StandbyCluster)
-	c.logger.Info("-------- HERE ENDS THE LOGS TIMEINEID ------------")
-
+	c.logger.Info("-------- HERE COMES THE LOGS spiloEnvVars ------------")
 	c.logger.Info(spiloEnvVars)
+	c.logger.Info("-------- HERE ENDS THE LOGS spiloEnvVars ------------")
 
 	// pickup the docker image for the spilo container
 	effectiveDockerImage := util.Coalesce(spec.DockerImage, c.OpConfig.DockerImage)
@@ -1869,8 +1869,9 @@ func (c *Cluster) generateCloneEnvironment(description *acidv1.CloneDescription)
 			} else {
 				c.logger.Error("cannot figure out S3 or GS bucket or AZ storage account. All options are empty in the config.")
 			}
-			c.logger.Info("-------- HERE COME THE LOGS ------------")
+			c.logger.Info("-------- HERE COME THE LOGS in generateCloneEnvironment ------------")
 			c.logger.Info(description)
+			c.logger.Info("-------- HERE ENDS THE LOGS in generateCloneEnvironment ------------")
 
 			// append suffix because WAL location name is not the whole path
 			result = append(result, v1.EnvVar{Name: "CLONE_WAL_BUCKET_SCOPE_SUFFIX", Value: getBucketScopeSuffix(description.UID)})
