@@ -1871,9 +1871,6 @@ func (c *Cluster) generateCloneEnvironment(description *acidv1.CloneDescription)
 			} else {
 				c.logger.Error("cannot figure out S3 or GS bucket or AZ storage account. All options are empty in the config.")
 			}
-			c.logger.Info("-------- HERE COME THE LOGS in generateCloneEnvironment ------------")
-			c.logger.Info(fmt.Sprintf("%+v", description))
-			c.logger.Info("-------- HERE ENDS THE LOGS in generateCloneEnvironment ------------")
 
 			// append suffix because WAL location name is not the whole path
 			result = append(result, v1.EnvVar{Name: "CLONE_WAL_BUCKET_SCOPE_SUFFIX", Value: getBucketScopeSuffix(description.UID)})
@@ -1912,7 +1909,17 @@ func (c *Cluster) generateCloneEnvironment(description *acidv1.CloneDescription)
 
 			result = append(result, v1.EnvVar{Name: "CLONE_AWS_S3_FORCE_PATH_STYLE", Value: s3ForcePathStyle})
 		}
+		if description.TimelineID != "" {
+			c.logger.Info("-------- HERE COME THE LOGS in checking timelineid ------------")
+			c.logger.Info(fmt.Sprintf("%+v", description.TimelineID))
+			c.logger.Info("-------- HERE ENDS THE LOGS in checking timelineid  ------------")
+			result = append(result, v1.EnvVar{Name: "CLONE_TARGET_TIMELINE", Value: description.TimelineID})
+		}
 	}
+
+	c.logger.Info("-------- HERE COME THE LOGS in generateCloneEnvironment ------------")
+	c.logger.Info(fmt.Sprintf("%+v", result))
+	c.logger.Info("-------- HERE ENDS THE LOGS in generateCloneEnvironment ------------")
 
 	return result
 }
