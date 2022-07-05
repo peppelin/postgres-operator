@@ -875,13 +875,6 @@ func (c *Cluster) generateSpiloPodEnvVars(
 
 	if cloneDescription != nil && cloneDescription.ClusterName != "" {
 		envVars = append(envVars, c.generateCloneEnvironment(cloneDescription)...)
-		c.logger.Info("-------- HERE COME THE LOGS CALLING c.generateCloneEnvironment ------------")
-		c.logger.Info(fmt.Sprintf("%+v", envVars))
-		c.logger.Info("-------- HERE ENDS THE LOGS CALLING c.generateCloneEnvironment ------------")
-		c.logger.Info("-------- HERE COME THE LOGS printing timelineID ------------")
-		c.logger.Info(fmt.Sprintf("%+v", cloneDescription.TimelineID))
-		c.logger.Info("-------- HERE ENDS THE LOGS printing timelineID ------------")
-
 	}
 
 	if standbyDescription != nil {
@@ -1164,9 +1157,6 @@ func (c *Cluster) generateStatefulSet(spec *acidv1.PostgresSpec) (*appsv1.Statef
 		spiloConfiguration,
 		spec.Clone,
 		spec.StandbyCluster)
-	c.logger.Info("-------- HERE COMES THE LOGS Generate statfulset spiloEnvVars 2 ------------")
-	c.logger.Info(fmt.Sprintf("%+v", spiloEnvVars))
-	c.logger.Info("-------- HERE ENDS THE LOGS Generate statfulset spiloEnvVars 2 ------------")
 
 	// pickup the docker image for the spilo container
 	effectiveDockerImage := util.Coalesce(spec.DockerImage, c.OpConfig.DockerImage)
@@ -1910,16 +1900,9 @@ func (c *Cluster) generateCloneEnvironment(description *acidv1.CloneDescription)
 			result = append(result, v1.EnvVar{Name: "CLONE_AWS_S3_FORCE_PATH_STYLE", Value: s3ForcePathStyle})
 		}
 		if description.TimelineID != "" {
-			c.logger.Info("-------- HERE COME THE LOGS in checking timelineid ------------")
-			c.logger.Info(fmt.Sprintf("%+v", description.TimelineID))
-			c.logger.Info("-------- HERE ENDS THE LOGS in checking timelineid  ------------")
 			result = append(result, v1.EnvVar{Name: "CLONE_TARGET_TIMELINE", Value: description.TimelineID})
 		}
 	}
-
-	c.logger.Info("-------- HERE COME THE LOGS in generateCloneEnvironment ------------")
-	c.logger.Info(fmt.Sprintf("%+v", result))
-	c.logger.Info("-------- HERE ENDS THE LOGS in generateCloneEnvironment ------------")
 
 	return result
 }
